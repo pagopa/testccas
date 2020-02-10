@@ -30,19 +30,14 @@ app.get("/clientcertificate", (req, res) => {
   const clientCertificateHeader = req.headers["x-arr-clientcert"];
 
   if (clientCertificateHeader !== null && clientCertificateHeader !== "") {
-    res.json({
-      base64: clientCertificateHeader
-    });
-
-    /*
     const pem = `-----BEGIN CERTIFICATE-----${clientCertificateHeader}-----END CERTIFICATE-----`;
     const incomingCert = pki.certificateFromPem(pem);
     const fingerprint = pki.getPublicKeyFingerprint(incomingCert.publicKey);
 
     res.json({
+      base64: clientCertificateHeader,
       fingerprint
     });
-    */
   }
 
   res.status(400).json({

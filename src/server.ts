@@ -2,6 +2,8 @@ import * as express from "express";
 
 import * as bodyParser from "body-parser";
 
+import { asn1, md, pki } from "node-forge";
+
 // Constants
 const PORT = 3000;
 
@@ -21,6 +23,24 @@ app.get("/", (_, res) => {
 app.get("/headers", (req, res) => {
   res.json({
     headers: req.headers
+  });
+});
+
+app.get("/clientcertificate", (req, res) => {
+  const clientCertificateHeader = req.headers["X-ARR-ClientCert"];
+
+  if (clientCertificateHeader !== null) {
+    const pem = `-----BEGIN CERTIFICATE-----${clientCertificateHeader}-----END CERTIFICATE-----`;
+    const incomingCert = pki.certificateFromPem(pem);
+    const fingerprint = pki.getPublicKeyFingerprint(incomingCert.publicKey);
+
+    res.json({
+      fingerprint
+    });
+  }
+
+  res.status(400).json({
+    error: "No client certificate"
   });
 });
 

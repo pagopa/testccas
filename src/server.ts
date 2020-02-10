@@ -27,9 +27,9 @@ app.get("/headers", (req, res) => {
 });
 
 app.get("/clientcertificate", (req, res) => {
-  const clientCertificateHeader = req.headers["X-ARR-ClientCert"];
+  const clientCertificateHeader = req.headers["x-arr-clientcert"];
 
-  if (clientCertificateHeader !== null) {
+  if (clientCertificateHeader !== null && clientCertificateHeader !== "") {
     res.json({
       base64: clientCertificateHeader
     });

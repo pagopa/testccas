@@ -49,5 +49,5 @@ steps:
       ConnectionType: 'AzureRM'
       azureSubscription: 'azure'
       appType: 'webApp'
-      WebAppName: 'io-lab-app-testccas'
+      WebAppName: 'io-lab-app-pagopaproxy'
       packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
